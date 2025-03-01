@@ -23,7 +23,7 @@ class UsersController {
   async update(request, response){
     const { name, email, role } = request.body
     const user_id = request.user.id
-    
+    console.log(request.body)
     const database = await sqliteConnection()
 
     const user = await database.get('SELECT * FROM users WHERE id = (?)',[user_id])
@@ -42,7 +42,7 @@ class UsersController {
     user.email = email ?? user.email
     user.role = role ?? user.role
 
-    if( password && !old_password){
+    /*if( password && !old_password){
       throw new AppError("Você precisa informar a senha antiga para definir a nova senha")
     }
 
@@ -54,7 +54,7 @@ class UsersController {
       }
 
       user.password = await hash(password, 8)
-    }
+    }*/
 
     await database.run(`
       UPDATE users SET
