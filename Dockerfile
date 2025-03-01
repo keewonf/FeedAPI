@@ -17,7 +17,7 @@ RUN npm install -g pm2
 COPY . .
 
 # Exponha a porta que o servidor Express.js usará
-EXPOSE 3000
+EXPOSE 3333
 
 # Comando para iniciar o servidor usando pm2
 CMD ["pm2-runtime", "start", "ecosystem.config.js", "--env", "production"]
