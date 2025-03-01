@@ -7,8 +7,11 @@ WORKDIR /app
 # Copie os arquivos de pacotes para o diretório de trabalho
 COPY package*.json ./
 
-# Instale as dependências
+# Instale as dependências do projeto
 RUN npm install
+
+# Instale o pm2 globalmente
+RUN npm install -g pm2
 
 # Copie o restante dos arquivos da aplicação
 COPY . .
@@ -16,5 +19,5 @@ COPY . .
 # Exponha a porta que o servidor Express.js usará
 EXPOSE 3000
 
-# Comando para iniciar o servidor
-CMD ["npm", "start"]
+# Comando para iniciar o servidor usando pm2
+CMD ["pm2-runtime", "start", "ecosystem.config.js", "--env", "production"]
