@@ -14,14 +14,11 @@ const routes = require('./routes')
 migrationsRun()
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin: 'https://turtlefeeds.netlify.app',  // URL do frontend no Netlify
+  credentials: true // Permite cookies/sessões, se necessário
+}));
 app.use(express.json())
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://turtlefeeds.netlify.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
 
 app.use('/files/avatars', express.static(path.join(uploadConfig.UPLOADS_FOLDER, 'avatars')));
 
