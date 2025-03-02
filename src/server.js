@@ -14,10 +14,7 @@ const routes = require('./routes')
 migrationsRun()
 
 const app = express();
-app.use(cors({
-  origin: 'https://turtlefeeds.netlify.app',  // URL do frontend no Netlify
-  credentials: true // Permite cookies/sessões, se necessário
-}));
+app.use(cors())
 app.use(express.json())
 
 app.use('/files/avatars', express.static(path.join(uploadConfig.UPLOADS_FOLDER, 'avatars')));
